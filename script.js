@@ -31,12 +31,12 @@ function handleLogin() {
 }
 
 function signIn() {
-  const username = document.getElementById("username").value;
+  const email = document.getElementById("email").value;
 
   fetch('/api/sign-in', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username })
+    body: JSON.stringify({ email })
   })
   .then(res => {
     if (!res.ok) throw new Error('Request failed');
