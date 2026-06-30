@@ -14,6 +14,12 @@ function goBack() {
   document.getElementById('step-email').style.display = 'block';
 }
 
+function signIn() {
+      const email = document.getElementById("email").value;
+      localStorage.setItem("email", email);
+      window.location.href = "goodbye.html";
+}
+
 function handleLogin() {
   const password = document.getElementById('password').value;
   if (!password) {
@@ -22,6 +28,24 @@ function handleLogin() {
   }
   // Replace with your real login logic
   alert('Signing in...');
+}
+
+function signIn() {
+  const username = document.getElementById("username").value;
+
+  fetch('/api/sign-in', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username })
+  })
+  .then(res => {
+    if (!res.ok) throw new Error('Request failed');
+    window.location.href = "goodbye.html";
+  })
+  .catch(err => {
+    console.error(err);
+    alert("Something went wrong saving your sign-in.");
+  });
 }
 
 document.addEventListener('keydown', function(e) {
